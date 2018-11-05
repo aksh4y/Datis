@@ -70,8 +70,10 @@ module.exports = function () {
                                 .then(function (d) {
                                     console.log(d[0]._users);
                                     d[0]._users.push(user);
-                                    d[0].save();
-                                    console.log(d[0]);
+                                    model.deductionModel.updateDeduction(d[0]._id, d[0])
+                                        .then(function () {
+
+                                        });
                                 });
                             /*findOneAndUpdate({"_id": deduction._id}, {$push: {_users: userId}}, function (err, updatedDeduction) {
                                 if(err) {
