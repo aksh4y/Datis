@@ -1,5 +1,5 @@
 {
-  "name": "Datis",
+  "name": "datis",
   "version": "1.0.0",
   "description": "Employee app using MEAN MVC for Datis",
   "main": "server.js",
