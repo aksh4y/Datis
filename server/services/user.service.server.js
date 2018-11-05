@@ -94,7 +94,7 @@ module.exports = function (app, userModel) {
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "/auth/facebook/callback",
+        callbackURL: "https://datis-app.herokuapp.com/auth/facebook/callback",    //enforce https
         profileFields: ['id', 'displayName', 'email'],
         enableProof: true
     }, facebookStrategy));
