@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-xs-12">
+            <div class="navbar-text pull-left">
+                <a href="#/admin" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a href="#/admin/create" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    Admin Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid as-bottom-pad">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8 text-center" style="margin-top:10px">
+        <h1>USER MANAGEMENT</h1>
+        <input ng-model="searchText" type="text" class="form-control as-search" placeholder="Search employees">
+        <div style="margin-top:50px;">
+            <div ng-repeat="u in model.users | filter:searchText:strict" style="float:left; padding-right:10px">
+                <div class="user-container">
+                    <div class="dashboard-edit">
+                        <a href="#/profile/{{u._id}}" class="dash-text">Edit</a>
+                    </div>
+                </div>
+                <br/>
+                <div class="info-title">{{u.username}}</div>
+                <div class="info-subtitle">{{u.firstName}} {{u.lastName}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+</div>
+
+<div class="alert alert-danger" ng-show="model.error">{{model.error}}</div>
+<div class="alert alert-success" ng-show="model.message">{{model.message}}</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="row container-fluid">
+        <div class="col-xs-12">
+            <div class="navbar-text pull-right">
+                <a href="#/profile" class="navbar-link">
+                      <span class="glyphicon glyphicon-user">
+                      </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

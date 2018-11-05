@@ -1,0 +1,199 @@
+<script>
+    function closeWarning() {
+        $('#warning').remove();
+    }
+</script>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-xs-12">
+            <div class="navbar-text pull-right hidden-xs hidden-sm">
+                <a ng-click="model.logout()"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-left">
+                <a href="#/profile" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--<div ng-if="model.deductions.length == 0">
+    <h3 class="text-center">You have no deductions available</h3>
+</div>-->
+
+
+<div class="container-fluid as-bottom-pad" style="margin-top:10px">
+    <div class="col-xs-2">
+        <div id="wrapper" data-spy="scroll" data-target="#spy" class="">
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="sidebar-wrapper" style="background:rgba(0, 0, 0, 0.4)">
+                        <nav id="spy">
+                            <ul id="deduction-list" class="sidebar-nav nav list-group"
+                                style="margin-top: 10px; width: 90%; margin-left: 5%">
+                                <a href="#/deductions" class="btn btn-block btn-success" style="margin-bottom: 15px;">CREATE
+                                    DEDUCTION</a>
+                                <p ng-if="model.userDeductions.length !== 0" style="color: #3bfffb">QUICK ADD</p>
+                                <br/>
+                                <input ng-model="searchDeduction" type="text" class="form-control as-search"
+                                       placeholder="Search Deductions">
+                                <li ng-repeat="deduction in model.deductions | filter:searchDeduction:strict"
+                                    class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <a style="color: wheat; padding-left: 0"
+                                               href="#/chat/{{model.user._id}}/deduction/{{deduction._id}}/new">{{deduction.name}}</a>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <span ng-click="model.addDeduction(deduction)"
+                                                  class="glyphicon glyphicon-plus pull-right"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-8 text-center">
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ng-model="model.user.username" type="text" class="form-control" id="username"
+                       placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name"
+                       placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name"
+                       placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input ng-model="model.user.salary" type="number" class="form-control" id="salary"
+                       placeholder="10000">
+            </div>
+            <h2>Deductions</h2>
+            <div ng-if="model.userDeductions.length == 0">
+                <p style="font-style: italic; font-size: 20px">No Deductions</p>
+            </div>
+            <div ng-if="model.userDeductions.length > 0" ng-repeat="deduction in model.userDeductions">
+                <div class="col-xs-5">
+                    <div class="form-group">
+                        <label for="deduction-name">Deduction Name</label>
+                        <input ng-model="deduction.name" type="text" class="form-control" id="deduction-name">
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="form-group">
+                        <label for="deduction-value">Deduction Value</label>
+
+                        <input ng-model="deduction.value" type="number" min="0" class="form-control"
+                               id="deduction-value">
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <br/>
+                    <br/>
+                    <a ng-click="model.removeDeduction(deduction)">
+                        <span class="glyphicon glyphicon-remove pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </form>
+        <div class="col-xs-12">
+            <h1>In Hand Salary: {{model.finalSalary}}</h1>
+        </div>
+    </div>
+    <div class="col-xs-2 col-sm-4"></div>
+</div>
+
+
+<!--<div class="container-fluid as-bottom-pad">
+    <div class="col-xs-2">
+        <div id="wrapper" data-spy="scroll" data-target="#spy" class="">
+            <div class="row">
+                <div class="col-md-2">
+                    &lt;!&ndash; Sidebar &ndash;&gt;
+                    <div id="sidebar-wrapper" style="background:rgba(0, 0, 0, 0.4)">
+                        <nav id="spy">
+                            <ul id="deduction-list" class="sidebar-nav nav list-group"
+                                style="margin-top: 10px; width: 90%; margin-left: 5%">
+                                <a href="#/deductions" class="btn btn-block btn-success" style="margin-bottom: 15px;">CREATE
+                                    DEDUCTION</a>
+                                <p ng-if="model.userDeductions.length !== 0" style="color: #3bfffb">QUICK ADD</p>
+                                <br/>
+                                <input ng-model="searchDeduction" type="text" class="form-control as-search"
+                                       placeholder="Search Deductions">
+                                <li ng-repeat="deduction in model.deductions | filter:searchDeduction:strict"
+                                    class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <a style="color: wheat; padding-left: 0"
+                                               href="#/chat/{{model.user._id}}/deduction/{{deduction._id}}/new">{{deduction.name}}</a>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <span ng-click="model.removeDeduction(deduction)"
+                                                  class="glyphicon glyphicon-plus pull-right"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-8 text-center" style="margin-top:10px">
+        <input ng-model="searchText" type="text" class="form-control as-search" placeholder="Search employees">
+        <div style="margin-top:50px;">
+            <div ng-repeat="u in model.users" style="float:left; padding-right:10px">
+                <div class="user-container">
+                    <div class="dashboard-edit">
+                        <a ng-click="model.editUser(u)" class="dash-text">Edit</a>
+                    </div>
+                </div>
+                <br/>
+                <div class="info-title">{{u.username}}</div>
+                <div class="info-subtitle">{{u.firstName}} {{u.lastName}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+</div>
+-->
+
+<div class="alert alert-danger" ng-show="model.error">{{model.error}}</div>
+<div class="alert alert-success" ng-show="model.message">{{model.message}}</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="row container-fluid">
+        <div class="col-xs-12">
+            <div class="navbar-text pull-right">
+                <a href="#/profile" class="navbar-link">
+                      <span class="glyphicon glyphicon-user">
+                      </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
